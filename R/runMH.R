@@ -30,8 +30,7 @@
 ##' @param sigma_aux = the SD of the auxillary distribution (relative magnitude of noise introduced to the target dist).  Set to NULL to run regular M-H.
 
 
-#Generate obesrved data
-x = rexp(1000, 5)
+
 
 
 # Function to calculate likelihood or 'noisy'/auxillary likelihood
@@ -71,8 +70,6 @@ stepMH = function(x, lambda, sigma, sigma_aux = NULL){
               ))
 }
 
-stepMH(x, 1, 0.03, sigma_aux = 0.02)
-
 
 
 runMH = function(x, lambda, sigma, N, sigma_aux = NULL){
@@ -97,12 +94,6 @@ runMH = function(x, lambda, sigma, N, sigma_aux = NULL){
   return(chain)
 }
 
-
-plot(runMH(x, lambda = 2, sigma = 0.03, N = 10000, sigma_aux = NULL)$lambda)
-
-pmhrun = runMH(x, 2, 0.03, 10000, sigma_aux = 0.1)
-plot(pmhrun)
-hist(pmhrun)
 
 
 
