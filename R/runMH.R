@@ -15,7 +15,6 @@
 
 
 #v_is are randomly generated to estimate integral (when likelihood is )
-
 #v_is could also be the actual estimate of the integrals (you could go a level up)
 
 
@@ -23,17 +22,17 @@
 # https://darrenjw.wordpress.com/2010/09/20/the-pseudo-marginal-approach-to-exact-approximate-mcmc-algorithms/
 
 
-##' @param x = data
-##' @param lambda = initial proposal for parameter value
-##' @param sigma = the SD of the proposal distribution
-##' @param sigma is not the expected jump size (depends on the posterior, but also the prob that a proposal is accepted, so a function of the posterior)
-##' @param sigma_aux = the SD of the auxillary distribution (relative magnitude of noise introduced to the target dist).  Set to NULL to run regular M-H.
 
 
+#' Function to calculate likelihood or 'noisy'/auxillary likelihood.
+#'
+#' @name get_ll
+#'
+#' @param x data
+#' @param lambda initial proposal for parameter value
+#' @param sigma_aux the SD of the auxillary distribution (relative magnitude of noise introduced to the target dist).  Set to NULL to run regular M-H.
 
 
-
-# Function to calculate likelihood or 'noisy'/auxillary likelihood
 get_ll = function(x, lambda, sigma_aux = NULL){
   if(!is.null(sigma_aux)){
     ll = sum(dexp(x, rate = lambda, log = T)) + rlnorm(1, 0, sigma_aux) # = v_i
@@ -47,6 +46,18 @@ get_ll = function(x, lambda, sigma_aux = NULL){
 
   ll
 }
+
+
+
+#' Perform single M-H step
+#'
+#' @name stepMH
+#'
+#' @param x data
+#' @param lambda initial proposal for parameter value
+#' @param sigma the SD of the proposal distribution. is not the expected jump size (depends on the posterior, but also the prob that a proposal is accepted, so a function of the posterior)
+#' @param sigma_aux the SD of the auxillary distribution (relative magnitude of noise introduced to the target dist).  Set to NULL to run regular M-H.
+
 
 
 stepMH = function(x, lambda, sigma, sigma_aux = NULL){
@@ -69,6 +80,18 @@ stepMH = function(x, lambda, sigma, sigma_aux = NULL){
               , accepted = (lambda == lambda_prime)
               ))
 }
+
+
+
+#' Run M-H chain
+#'
+#' @name runMH
+#'
+#' @param x data
+#' @param lambda initial proposal for parameter value
+#' @param sigma the SD of the proposal distribution. is not the expected jump size (depends on the posterior, but also the prob that a proposal is accepted, so a function of the posterior)
+#' @param N the number of iterations of M-H that you'd like to run
+#' @param sigma_aux the SD of the auxillary distribution (relative magnitude of noise introduced to the target dist).  Set to NULL to run regular M-H.
 
 
 
