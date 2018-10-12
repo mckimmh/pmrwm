@@ -23,12 +23,6 @@
 # https://darrenjw.wordpress.com/2010/09/20/the-pseudo-marginal-approach-to-exact-approximate-mcmc-algorithms/
 
 
-##' @param x = data
-##' @param lambda = initial proposal for parameter value
-##' @param sigma = the SD of the proposal distribution
-##' @param sigma is not the expected jump size (depends on the posterior, but also the prob that a proposal is accepted, so a function of the posterior)
-##' @param sigma_aux = the SD of the auxillary distribution (relative magnitude of noise introduced to the target dist).  Set to NULL to run regular M-H.
-
 
 #Generate obesrved data
 x = rexp(1000, 5)
