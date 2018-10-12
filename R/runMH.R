@@ -25,7 +25,7 @@
 
 
 #Generate obesrved data
-x = rexp(1000, 5)
+y = rexp(1000, 5)
 
 
 # Function to calculate likelihood or 'noisy'/auxillary likelihood
