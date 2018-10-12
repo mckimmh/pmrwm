@@ -49,6 +49,10 @@ stepMH = function(x, lambda, sigma){
 stepMH(x, 1, 0.03)
 
 
+##' @param x = data
+##' @param lambda = initial proposal for parameter value
+##' @param sigma = SD of the proposal distribution
+##' @param l = the expected jump size (depends on sigma, but also the prob that a proposal is accepted, so a function of the posterior)
 
 runMH = function(x, lambda, sigma, N){
   lambdas = c(lambda)
